@@ -25,20 +25,39 @@ switch (input) {
     case "movie-this":
         movie()
         break;
-    case "do-what-it-says":
+    case "what-it-do-baby":
         doThing()
         break;
 }
 function concert() {
     axios.get("https://rest.bandsintown.com/artists/" + method + "/events?app_id=codingbootcamp").then(function (response) {
-        var concertData = response.data
-        console.log(concertData)
+        for (var i = 0; i < response.data.length; i++) {
+            var concertData = response.data[i];
+            var conDate = moment(concertData.datetime).format("MM/DD/YYYY")
+            console.log(`
+            =================== Venue Details ===============\n
+            Name: ${concertData.venue.name}\n
+            Country: ${concertData.venue.country}\n
+            City: ${concertData.venue.city}\n
+            Date: ${conDate}\n
+            =====================================================\n
+            `)
+        }
     })
 }
 function movie() {
-    axios.get("http://www.omdbapi.com/?t=" + method + "&y=&plot=short&tomatoes=True&apikey=trilogy").then(function (response) {
+    axios.get("http://www.omdbapi.com/?t=" + method + "&y=&plot=short&tomatoes=true&apikey=trilogy").then(function (response) {
         var movieData = response.data
-        console.log(movieData)
+        console.log(
+            "\n Movie: " + movieData.Title,
+            "\n Year of Release: " + movieData.Year,
+            "\n Imdb rating: " + movieData.Ratings.imdbRating,
+            "\n Rotten Tomatoes: " + movieData.Ratings[1],
+            "\n Country of production: " + movieData.Country,
+            "\n Language: " + movieData.Language,
+            "\n Actors: " + movieData.Actors,
+            "\n Plot of the Movie: " + movieData.Plot
+        )
     })
 }
 function song() {
@@ -46,15 +65,13 @@ function song() {
         if (!error) {
             for (var i = 0; i < data.tracks.items.length; i++) {
                 var songData = data.tracks.items[i];
-                //artist
-                console.log("Artist: " + songData.artists[0].name);
-                //song name
-                console.log("Song: " + songData.name);
-                //spotify preview link
-                console.log("Preview URL: " + songData.preview_url);
-                //album name
-                console.log("Album: " + songData.album.name);
-                console.log("-----------------------");
+                console.log(`
+                Artist: ${songData.artists[0].name}\n
+                Song: ${songData.name}\n
+                Preview Url: ${songData.preview_url}\n
+                Album: ${songData.album.name}\n
+                =============================================
+                `)
             }
         } else {
             console.log('Error occurred.');
@@ -65,7 +82,7 @@ function song() {
 function doThing() {
     fs.readFile('random.txt', "utf8", function (error, data) {
         if (error) {
-            console.log('error occuerred: ' + error)
+            console.log('error occurred: ' + error)
         } else {
             var txt = data.split(',');
 
