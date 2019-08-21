@@ -1,7 +1,7 @@
-#liri Bot - it's like siri but it's not 
->liri is a node tool, that takes in user input and spits out
->a response depending on the method chosen by the user.
->
+# liri Bot - it's like siri but it's not 
+liri is a node tool, that takes in user input and spits out
+a response depending on the method chosen by the user.
+
 ## Methods available
 >The Liri bot has 4 usable methods:
 - Concert-this
