@@ -51,8 +51,8 @@ function movie() {
         console.log(
             "\n Movie: " + movieData.Title,
             "\n Year of Release: " + movieData.Year,
-            "\n Imdb rating: " + movieData.Ratings.imdbRating,
-            "\n Rotten Tomatoes: " + movieData.Ratings[1],
+            "\n Imdb rating: " + movieData.Ratings[0].Value,
+            "\n Rotten Tomatoes: " + movieData.Ratings[1].Value,
             "\n Country of production: " + movieData.Country,
             "\n Language: " + movieData.Language,
             "\n Actors: " + movieData.Actors,
@@ -70,7 +70,6 @@ function song() {
                 Song: ${songData.name}\n
                 Preview Url: ${songData.preview_url}\n
                 Album: ${songData.album.name}\n
-                =============================================
                 `)
             }
         } else {
@@ -80,13 +79,30 @@ function song() {
 
 }
 function doThing() {
-    fs.readFile('random.txt', "utf8", function (error, data) {
-        if (error) {
-            console.log('error occurred: ' + error)
-        } else {
-            var txt = data.split(',');
-
-            song(txt[1]);
+    fs.readFile('random.txt', "utf8", function (err, data) {
+        if (err) {
+            console.log(err)
         }
+        var info = data.split(",")
+        var inf01 = info[1]
+        console.log("Let me tell you what it do doe")
+        function doIt() {
+            spotify.search({ type: 'track', query: inf01, limit: 1 }, function (error, data) {
+                if (!error) {
+                    for (var i = 0; i < data.tracks.items.length; i++) {
+                        var songData = data.tracks.items[i];
+                        console.log(`
+                Artist: ${songData.artists[0].name}\n
+                Song: ${songData.name}\n
+                Preview Url: ${songData.preview_url}\n
+                Album: ${songData.album.name}\n
+                `)
+                    }
+                } else {
+                    console.log('Error occurred.');
+                }
+            });
+        }
+        doIt()
     });
 }
