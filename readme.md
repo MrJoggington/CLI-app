@@ -13,18 +13,18 @@ The Liri bot has 4 usable methods:
 the *concert-this* method takes in a user input of an artist or band, and uses the bandsintown api to see if the specified artist or band has concerts. It finds the name of up to 20 venues, their location, and the date of when it will occur.
 
 > Here is an example:
-[![Concert test data](./concert-test.png)]
+[![Concert test data](./concert-test.PNG)]
 
 ### Movie-this
 the  *movie-this* method takes in user input of a movie and runs it through the omdb api database. Upon entering the movie it should respond like so:
 
->[![movie test data](./movie-test.png)]
+>[![movie test data](./movie-test.PNG)]
 
 ### Spotify-this-song
 *spotify-this-song* takes in user input of a song and searches for the song using the spotify api, and responds with the album, artist, and name of the song.
 
 > Here is an example:
-[![spotify test data](./song-test.png)]
+[![spotify test data](./song-test.PNG)]
 
 ### What-it-do-baby
 This is actually just a fun method that takes no user input. 
